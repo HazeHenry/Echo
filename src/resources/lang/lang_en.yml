@@ -1,0 +1,55 @@
+# Message settings
+cancel-message: "&cMessage editing cancelled."
+set-join-prompt: "&aType your &6join &amessage in chat. &7Type '&ccancel&7' to abort."
+set-leave-prompt: "&aType your &6leave &amessage in chat. &7Type 'cancel' to abort."
+reset-confirmation: "&eYour join and leave messages have been reset."
+no-permission: "&cYou don't have permission to set your messages!"
+no-message-found: "&cNo message yet!"
+
+# Main Menu customization
+menu-title: "&2&lECHO &7┃ &aMain Menu"
+menu-join-message: "&aSet &6Join &aMessage"
+menu-leave-message: "&aSet &6Leave &aMessage"
+menu-reset-messages: "&aReset &6Messages"
+
+# Main Menu items
+menu-item-join-message:
+  name: "&aSet &6Join &aMessage"
+  lore:
+    - ""
+    - "&7Set a custom join message here,"
+    - "&7that every player will see once you connect."
+    - "&8Supports RGB and HEX colors!"
+    - ""
+    - "&7Supported placeholders: &e%name%&7, &e%prefix%&7, &e%world%"
+    - ""
+    - "&7Price"
+    - "&a1 Token"
+    - ""
+    - "&eClick to set your join message."
+
+menu-item-leave-message:
+  name: "&aSet &6Leave &aMessage"
+  lore:
+    - ""
+    - "&7Set a custom leave message here,"
+    - "&7that every player will see once you disconnect."
+    - "&8Supports RGB and HEX colors!"
+    - ""
+    - "&7Supported placeholders: &e%name%&7, &e%prefix%&7, &e%world%"
+    - ""
+    - "&7Price"
+    - "&a1 Token"
+    - ""
+    - "&eClick to set your leave message."
+
+# Remember: Always use lowercase placeholders, otherwise it won't work!
+menu-item-message-info:
+  name: "&aCurrent Messages"
+  lore:
+    - ""
+    - "&7Join Message"
+    - "&r%joinmessage%"
+    - ""
+    - "&7Leave Message"
+    - "&r%leavemessage%"

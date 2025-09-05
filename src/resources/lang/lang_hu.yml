@@ -1,0 +1,55 @@
+# Message settings
+cancel-message: "&cAz üzenet szerkesztése megszakítva."
+set-join-prompt: "&aÍrd be a &6csatlakozási &aüzeneted a chatbe. &7'&ccancel&7'&a-lel megszakíthatod."
+set-leave-prompt: "&aÍrd be a &6kilépési &aüzeneted a chatbe. &7'&ccancel&7'&a-lel megszakíthatod."
+reset-confirmation: "&eA csatlakozási és kilépési üzenetek visszaállítva."
+no-permission: "&cNincs jogod beállítani az üzeneteidet!"
+no-message-found: "§cMég nincs üzenet!"
+
+# Main Menu customization
+menu-title: "&2&lECHO &7┃ &aFőmenü"
+menu-join-message: "&6Csatlakozási &aüzenet beállítása"
+menu-leave-message: "&6Kilépési &aüzenet beállítása"
+menu-reset-messages: "&6Üzenetek &avisszaállítása"
+
+# Main Menu items
+menu-item-join-message:
+  name: "&6Csatlakozási &aüzenet beállítása"
+  lore:
+    - ""
+    - "&7Írd be a csatlakozási üzeneted a chatbe,"
+    - "&7amit minden játékos látja, amikor csatlakozik."
+    - "&8RGB és HEX színek támogatása!"
+    - ""
+    - "&7Lehetséges helyű helyű támogatás: &e%name%&7, &e%prefix%&7, &e%world%"
+    - ""
+    - "&7Ár"
+    - "&a1 Token"
+    - ""
+    - "&eKatt a beállításhoz."
+
+menu-item-leave-message:
+  name: "&6Kilépési &aüzenet beállítása"
+  lore:
+    - ""
+    - "&7Írd be a kilépési üzeneted a chatbe,"
+    - "&7amit minden játékos látja, amikor kilép."
+    - "&8RGB és HEX színek támogatása!"
+    - ""
+    - "&7Lehetséges helyű helyű támogatás: &e%name%&7, &e%prefix%&7, &e%world%"
+    - ""
+    - "&7Ár"
+    - "&a1 Token"
+    - ""
+    - "&eKatt a beállításhoz."
+
+# Tudnivaló: Kisbetűs placeholder nevek fognak csak működni!
+menu-item-message-info:
+  name: "&aJelenlegi üzenetek"
+  lore:
+    - ""
+    - "&7Üdvözlő Üzenet"
+    - "&r%joinMessage%"
+    - ""
+    - "&7Kilépési Üzenet"
+    - "&r%leaveMessage%"
