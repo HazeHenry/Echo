@@ -3,8 +3,8 @@ package eu.northpoint.echo.listener;
 import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import eu.northpoint.echo.Echo;
 import eu.northpoint.echo.utils.DatabaseUtils;
+import eu.northpoint.echo.utils.StringUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -24,10 +24,12 @@ public class PlayerMessagesListener implements Listener {
 
         if (Echo.getInstance().getConfig().getBoolean("ph-world-enabled")) {
             joinMessage = joinMessage.replace("%world%", e.getPlayer().getWorld().getName());
+        } else {
+            joinMessage = joinMessage.replace("%world%", "");
         }
 
         joinMessage = IridiumColorAPI.process(joinMessage);
-        joinMessage = ChatColor.translateAlternateColorCodes('&', joinMessage);
+        joinMessage = StringUtils.processHex(joinMessage);
 
         Bukkit.broadcastMessage(joinMessage);
     }
@@ -44,11 +46,14 @@ public class PlayerMessagesListener implements Listener {
 
         if (Echo.getInstance().getConfig().getBoolean("ph-world-enabled")) {
             leaveMessage = leaveMessage.replace("%world%", e.getPlayer().getWorld().getName());
+        } else {
+            leaveMessage = leaveMessage.replace("%world%", "");
         }
 
         leaveMessage = IridiumColorAPI.process(leaveMessage);
-        leaveMessage = ChatColor.translateAlternateColorCodes('&', leaveMessage);
+        leaveMessage = StringUtils.processHex(leaveMessage);
 
         Bukkit.broadcastMessage(leaveMessage);
     }
+
 }

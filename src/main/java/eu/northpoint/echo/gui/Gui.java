@@ -76,7 +76,7 @@ public class Gui implements GuiHolder {
     public void addClose() {
         ItemStack close = new ItemStack(Material.BARRIER);
         ItemMeta meta = close.getItemMeta();
-        meta.setDisplayName("§cBezárás");
+        meta.setDisplayName("§c§l✘");
         close.setItemMeta(meta);
         addItem(new GuiItem(close, e -> this.close((Player) e.getWhoClicked()), 4, this.rows - 1));
     }

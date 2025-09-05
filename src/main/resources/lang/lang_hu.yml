@@ -7,7 +7,7 @@ no-permission: "&cNincs jogod beállítani az üzeneteidet!"
 no-message-found: "§cMég nincs üzenet!"
 
 # Main Menu customization
-menu-title: "&2&lECHO &7┃ &aFőmenü"
+menu-title: "&2&lECHO &7┃ &6Főmenü"
 menu-join-message: "&6Csatlakozási &aüzenet beállítása"
 menu-leave-message: "&6Kilépési &aüzenet beállítása"
 menu-reset-messages: "&6Üzenetek &avisszaállítása"
@@ -49,7 +49,7 @@ menu-item-message-info:
   lore:
     - ""
     - "&7Üdvözlő Üzenet"
-    - "&r%joinMessage%"
+    - "&r%joinmessage%"
     - ""
     - "&7Kilépési Üzenet"
-    - "&r%leaveMessage%"
+    - "&r%leavemessage%"

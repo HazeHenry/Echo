@@ -7,7 +7,7 @@ no-permission: "&cYou don't have permission to set your messages!"
 no-message-found: "&cNo message yet!"
 
 # Main Menu customization
-menu-title: "&2&lECHO &7┃ &aMain Menu"
+menu-title: "&2&lECHO &7┃ &6Main Menu"
 menu-join-message: "&aSet &6Join &aMessage"
 menu-leave-message: "&aSet &6Leave &aMessage"
 menu-reset-messages: "&aReset &6Messages"

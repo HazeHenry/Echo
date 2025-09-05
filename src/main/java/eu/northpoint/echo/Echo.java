@@ -14,9 +14,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -24,7 +22,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.stream.Collectors;
 
 public final class Echo extends JavaPlugin {
 
@@ -46,6 +43,7 @@ public final class Echo extends JavaPlugin {
         getCommand("setmessage").setExecutor(new SetMessagesCommand());
 
         connect();
+        saveConfig();
         setLanguage();
         checkForUpdates();
     }
@@ -127,4 +125,17 @@ public final class Echo extends JavaPlugin {
             }
         }.runTaskAsynchronously(this);
     }
+
+    public void reload() {
+        getLogger().info("Reloading plugin...");
+
+        reloadConfig();
+        saveConfig();
+
+        setLanguage();
+        checkForUpdates();
+
+        getLogger().info("Plugin reloaded!");
+    }
+
 }

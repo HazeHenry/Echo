@@ -6,28 +6,34 @@ import eu.northpoint.echo.commands.mainmenu.command.EchoMenuCommand;
 import eu.northpoint.echo.gui.Gui;
 import eu.northpoint.echo.localization.Messages;
 import eu.northpoint.echo.utils.DatabaseUtils;
+import eu.northpoint.echo.utils.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EchoMessageListener implements Listener {
 
     private HashMap<UUID, String> activeMessage = new HashMap<>();
 
     @EventHandler
-    public void onChat(AsyncPlayerChatEvent e) {
+    public void onChat(PlayerChatEvent e) {
         Player p = e.getPlayer();
-        if (!p.hasMetadata("echo.editactive")) return;
+
+        if (!EchoMenuCommand.getActiveMessageType().containsKey(p.getUniqueId())) return;
+
         e.setCancelled(true);
 
         String message = e.getMessage()
@@ -35,13 +41,12 @@ public class EchoMessageListener implements Listener {
                 .replace("%prefix%", p.getDisplayName());
         if (Echo.getInstance().getConfig().getBoolean("ph-world-enabled")) {
             message = message.replace("%world%", p.getWorld().getName());
+        } else {
+            message = message.replace("%world%", "");
         }
 
         if (message.equalsIgnoreCase("cancel")) {
-            p.removeMetadata("echo.editactive", Echo.getInstance());
-            EchoMenuCommand.getActiveMessageType().remove(p.getUniqueId());
-            p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1f, 1f);
-            p.sendMessage(Messages.format(Messages.CANCEL_MESSAGE));
+            handleCancel(p);
             return;
         }
 
@@ -53,7 +58,7 @@ public class EchoMessageListener implements Listener {
     }
 
     private void openConfirmationMenu(Player p, String message) {
-        Gui gui = new Gui("§2§lECHO §7┃ §aMessage Preview & Confirmation", 5);
+        Gui gui = new Gui("§2§lECHO §7┃ §6Message Preview", 5);
 
         gui.fillBorder(Material.GRAY_STAINED_GLASS_PANE);
         gui.fillBottom(Material.GRAY_STAINED_GLASS_PANE);
@@ -67,15 +72,15 @@ public class EchoMessageListener implements Listener {
         gui.show(p);
     }
 
-    // Items
-
     private ItemStack getPreview(String message) {
         ItemStack item = new ItemStack(Material.LIME_WOOL);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§6§lMESSAGE §7┃ §aPreview");
+        message = IridiumColorAPI.process(message);
+        message = StringUtils.processHex(message);
         meta.setLore(Arrays.asList(
                 "",
-                ChatColor.translateAlternateColorCodes('&', message)
+                message
         ));
         item.setItemMeta(meta);
         return item;
@@ -111,12 +116,11 @@ public class EchoMessageListener implements Listener {
     }
 
     private void handleCancel(Player p) {
-        p.removeMetadata("echo.editactive", Echo.getInstance());
+        p.closeInventory();
         EchoMenuCommand.getActiveMessageType().remove(p.getUniqueId());
         p.sendTitle("", "");
         p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1f, 1f);
         p.sendMessage(Messages.format(Messages.CANCEL_MESSAGE));
-        p.performCommand("echo");
     }
 
     private void handleConfirm(Player p) {
@@ -125,10 +129,10 @@ public class EchoMessageListener implements Listener {
             return;
         }
 
-        p.removeMetadata("echo.editactive", Echo.getInstance());
         p.sendTitle("", "");
         p.closeInventory();
         p.playSound(p, Sound.ENTITY_PLAYER_LEVELUP, 1f, 0.8f);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"lp user " + p.getName() + " permission unset echo.token.1");
 
         String[] messages = DatabaseUtils.getMessages(p.getUniqueId());
         switch (EchoMenuCommand.getActiveMessageType().get(p.getUniqueId())) {

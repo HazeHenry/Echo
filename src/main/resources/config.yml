@@ -9,17 +9,18 @@ ph-world-enabled: true
 # Permission used for administrative commands like token management, message wiping, etc.
 admin-permission: echo.admin
 
+# CURRENTLY NOT IMPLEMENTED FEATURE
 # Sets the currency used for setting messages
 # Possible currencies: money (vault), token (echo)
-currency: token
-amount: 1
+# currency: token
+# amount: 1
 
 # Menu configuration
 glowing-items: true
 
 # Title configuration for selection & setting
 title-enabled: true
-title-main: "§aJoin Message"
+title-main: "§aMessage Editing"
 title-sub: "§7Type your desired §6join§7/§6leave §7message in the chat."
 
 # Not recommended to remove, checks updates

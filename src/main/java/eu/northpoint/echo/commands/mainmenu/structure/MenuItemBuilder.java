@@ -22,7 +22,7 @@ public class MenuItemBuilder {
         ItemStack item = new ItemStack(Material.BOOK);
         ItemMeta meta = item.getItemMeta();
         if (Echo.getInstance().getConfig().getBoolean("glowing-items")) {
-            meta.addEnchant(Enchantment.UNBREAKING, 1, true);
+            meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         meta.setDisplayName(Messages.format(Messages.MENU_ITEM_JOIN_MESSAGE_NAME));
@@ -35,7 +35,7 @@ public class MenuItemBuilder {
         ItemStack item = new ItemStack(Material.BOOK);
         ItemMeta meta = item.getItemMeta();
         if (Echo.getInstance().getConfig().getBoolean("glowing-items")) {
-            meta.addEnchant(Enchantment.UNBREAKING, 1, true);
+            meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         meta.setDisplayName(Messages.format(Messages.MENU_ITEM_LEAVE_MESSAGE_NAME));

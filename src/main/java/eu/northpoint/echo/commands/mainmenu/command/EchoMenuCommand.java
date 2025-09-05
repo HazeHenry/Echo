@@ -11,7 +11,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.metadata.FixedMetadataValue;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -27,16 +26,31 @@ public class EchoMenuCommand implements CommandExecutor {
             return false;
         }
 
-        openMainMenu(p);
+        if (args.length < 1) {
+            openMainMenu(p);
+            return true;
+        }
+
+        if (args[0].equalsIgnoreCase("reload")) {
+            if (!sender.hasPermission("echo.admin")) {
+                sender.sendMessage("§cInsufficient permissions!");
+                return false;
+            }
+
+            Echo.getInstance().reload();
+            sender.sendMessage("§aPlugin reloaded!");
+            return true;
+        }
+
         return true;
     }
 
     private Gui openMainMenu(Player p) {
         Gui gui = new Gui(Messages.format(Messages.MENU_TITLE), 5);
 
-        gui.addClose();
         gui.fillBorder(Material.GRAY_STAINED_GLASS_PANE);
         gui.fillBottom(Material.GRAY_STAINED_GLASS_PANE);
+        gui.addClose();
 
         gui.addItem(MenuItemBuilder.joinMessageItem(), inventoryClickEvent -> handleMessage(p, "join"), 20);
         gui.addItem(MenuItemBuilder.leaveMessageItem(), inventoryClickEvent -> handleMessage(p, "leave"), 21);
@@ -52,7 +66,6 @@ public class EchoMenuCommand implements CommandExecutor {
         }
 
         p.closeInventory();
-        p.setMetadata("echo.editactive", new FixedMetadataValue(Echo.getInstance(), true));
         activeMessageType.put(p.getUniqueId(), type);
         p.playSound(p, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
         p.sendTitle(Messages.format(Messages.TITLE_MAIN), Messages.format(Messages.TITLE_SUB), 30, 20000, 0);
