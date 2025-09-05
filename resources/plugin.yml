@@ -1,0 +1,14 @@
+name: Echo
+version: '0.1'
+main: eu.northpoint.echo.Echo
+api-version: '1.21'
+author: HazeHenry
+description: Allows players to easily customize their join and leave messages, by admin given permission.
+website: https://github.com/HazeHenry/Echo
+commands:
+  echo:
+    description: Main menu
+    usage: /echo
+  setmessage:
+    description: Set join or leave message
+    usage: /setmessage <player> <join/leave> <message>
