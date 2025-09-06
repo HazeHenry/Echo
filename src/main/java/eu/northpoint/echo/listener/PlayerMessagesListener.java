@@ -28,10 +28,7 @@ public class PlayerMessagesListener implements Listener {
             joinMessage = joinMessage.replace("%world%", "");
         }
 
-        joinMessage = IridiumColorAPI.process(joinMessage);
-        joinMessage = StringUtils.processHex(joinMessage);
-
-        Bukkit.broadcastMessage(joinMessage);
+        Bukkit.broadcastMessage(StringUtils.process(joinMessage));
     }
 
     @EventHandler
@@ -50,10 +47,6 @@ public class PlayerMessagesListener implements Listener {
             leaveMessage = leaveMessage.replace("%world%", "");
         }
 
-        leaveMessage = IridiumColorAPI.process(leaveMessage);
-        leaveMessage = StringUtils.processHex(leaveMessage);
-
-        Bukkit.broadcastMessage(leaveMessage);
+        Bukkit.broadcastMessage(StringUtils.process(leaveMessage));
     }
-
 }

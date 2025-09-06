@@ -3,6 +3,7 @@ package eu.northpoint.echo.commands.mainmenu.structure;
 import eu.northpoint.echo.Echo;
 import eu.northpoint.echo.localization.Messages;
 import eu.northpoint.echo.utils.DatabaseUtils;
+import eu.northpoint.echo.utils.StringUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -25,8 +26,8 @@ public class MenuItemBuilder {
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
-        meta.setDisplayName(Messages.format(Messages.MENU_ITEM_JOIN_MESSAGE_NAME));
-        meta.setLore(Messages.format(Messages.MENU_ITEM_JOIN_MESSAGE_LORE));
+        meta.setDisplayName(StringUtils.process(Messages.MENU_ITEM_JOIN_MESSAGE_NAME));
+        meta.setLore(StringUtils.process(Messages.MENU_ITEM_JOIN_MESSAGE_LORE));
         item.setItemMeta(meta);
         return item;
     }
@@ -38,8 +39,8 @@ public class MenuItemBuilder {
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
-        meta.setDisplayName(Messages.format(Messages.MENU_ITEM_LEAVE_MESSAGE_NAME));
-        meta.setLore(Messages.format(Messages.MENU_ITEM_LEAVE_MESSAGE_LORE));
+        meta.setDisplayName(StringUtils.process(Messages.MENU_ITEM_LEAVE_MESSAGE_NAME));
+        meta.setLore(StringUtils.process(Messages.MENU_ITEM_LEAVE_MESSAGE_LORE));
         item.setItemMeta(meta);
         return item;
     }
@@ -47,9 +48,9 @@ public class MenuItemBuilder {
     public static ItemStack messageInfoItem(Player p) {
         String[] messages = DatabaseUtils.getMessages(p.getUniqueId());
         String joinMessage = messages.length > 0 && messages[0] != null
-                ? messages[0] : Messages.format(Messages.NO_MESSAGE_FOUND);
+                ? messages[0] : StringUtils.process(Messages.NO_MESSAGE_FOUND);
         String leaveMessage = messages.length > 1 && messages[1] != null
-                ? messages[1] : Messages.format(Messages.NO_MESSAGE_FOUND);
+                ? messages[1] : StringUtils.process(Messages.NO_MESSAGE_FOUND);
 
         joinMessage = ChatColor.translateAlternateColorCodes('&', joinMessage);
         leaveMessage = ChatColor.translateAlternateColorCodes('&', leaveMessage);
@@ -57,7 +58,7 @@ public class MenuItemBuilder {
         ItemStack item = new ItemStack(Material.PAPER);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',
-                Messages.format(Messages.MENU_ITEM_MESSAGE_INFO_NAME)));
+                StringUtils.process(Messages.MENU_ITEM_MESSAGE_INFO_NAME)));
 
         List<String> template = Messages.MENU_ITEM_MESSAGE_INFO_LORE;
 

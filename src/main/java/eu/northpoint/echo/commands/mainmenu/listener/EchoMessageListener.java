@@ -15,14 +15,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class EchoMessageListener implements Listener {
 
@@ -50,11 +49,16 @@ public class EchoMessageListener implements Listener {
             return;
         }
 
-        message = IridiumColorAPI.process(message);
-        message = ChatColor.translateAlternateColorCodes('&', message);
+        message = StringUtils.process(message);
 
         openConfirmationMenu(p, message);
         activeMessage.put(p.getUniqueId(), message);
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent e) {
+        activeMessage.remove(e.getPlayer().getUniqueId());
+        e.getPlayer().sendTitle("", "");
     }
 
     private void openConfirmationMenu(Player p, String message) {
@@ -75,12 +79,10 @@ public class EchoMessageListener implements Listener {
     private ItemStack getPreview(String message) {
         ItemStack item = new ItemStack(Material.LIME_WOOL);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName("§6§lMESSAGE §7┃ §aPreview");
-        message = IridiumColorAPI.process(message);
-        message = StringUtils.processHex(message);
+        meta.setDisplayName(StringUtils.process(Messages.PREVIEW_MENU_TITLE));
         meta.setLore(Arrays.asList(
                 "",
-                message
+                StringUtils.process(message)
         ));
         item.setItemMeta(meta);
         return item;
@@ -120,12 +122,12 @@ public class EchoMessageListener implements Listener {
         EchoMenuCommand.getActiveMessageType().remove(p.getUniqueId());
         p.sendTitle("", "");
         p.playSound(p, Sound.ENTITY_VILLAGER_NO, 1f, 1f);
-        p.sendMessage(Messages.format(Messages.CANCEL_MESSAGE));
+        p.sendMessage(StringUtils.process(Messages.CANCEL_MESSAGE));
     }
 
     private void handleConfirm(Player p) {
         if (!p.hasPermission("echo.token.1") && !p.hasPermission("echo.custommessage.unlimited")) {
-            p.sendMessage(Messages.format(Messages.NO_PERMISSION));
+            p.sendMessage(StringUtils.process(Messages.NO_PERMISSION));
             return;
         }
 

@@ -1,13 +1,17 @@
 package eu.northpoint.echo.utils;
 
+import com.iridium.iridiumcolorapi.IridiumColorAPI;
+import lombok.experimental.UtilityClass;
 import org.bukkit.ChatColor;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@UtilityClass
 public class StringUtils {
 
-    public static String processHex(String input) {
+    public String process(String input) {
         if (input == null) return "";
 
         Pattern hexPattern = Pattern.compile("<#([A-Fa-f0-9]{6})>");
@@ -24,6 +28,18 @@ public class StringUtils {
         }
         matcher.appendTail(sb);
 
-        return ChatColor.translateAlternateColorCodes('&', sb.toString());
+        String message = sb.toString();
+
+        IridiumColorAPI.process(message);
+        message = ChatColor.translateAlternateColorCodes('&', message);
+
+        return message;
+    }
+
+    public static List<String> process(List<String> messages) {
+        for (String line : messages) {
+            messages.set(messages.indexOf(line), process(line));
+        }
+        return messages;
     }
 }

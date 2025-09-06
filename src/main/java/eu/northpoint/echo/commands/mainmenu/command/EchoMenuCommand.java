@@ -4,6 +4,7 @@ import eu.northpoint.echo.Echo;
 import eu.northpoint.echo.commands.mainmenu.structure.MenuItemBuilder;
 import eu.northpoint.echo.gui.Gui;
 import eu.northpoint.echo.localization.Messages;
+import eu.northpoint.echo.utils.StringUtils;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -46,7 +47,7 @@ public class EchoMenuCommand implements CommandExecutor {
     }
 
     private Gui openMainMenu(Player p) {
-        Gui gui = new Gui(Messages.format(Messages.MENU_TITLE), 5);
+        Gui gui = new Gui(StringUtils.process(Messages.MENU_TITLE), 5);
 
         gui.fillBorder(Material.GRAY_STAINED_GLASS_PANE);
         gui.fillBottom(Material.GRAY_STAINED_GLASS_PANE);
@@ -61,13 +62,13 @@ public class EchoMenuCommand implements CommandExecutor {
 
     private void handleMessage(Player p, String type) {
         if (!p.hasPermission("echo.token.1") && !p.hasPermission("echo.token.infinite")) {
-            p.sendMessage(Messages.format(Messages.NO_PERMISSION));
+            p.sendMessage(StringUtils.process(Messages.NO_PERMISSION));
             return;
         }
 
         p.closeInventory();
         activeMessageType.put(p.getUniqueId(), type);
         p.playSound(p, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
-        p.sendTitle(Messages.format(Messages.TITLE_MAIN), Messages.format(Messages.TITLE_SUB), 30, 20000, 0);
+        p.sendTitle(StringUtils.process(Messages.TITLE_MAIN), StringUtils.process(Messages.TITLE_SUB), 30, 200000, 0);
     }
 }

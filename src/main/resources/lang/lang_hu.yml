@@ -11,6 +11,7 @@ menu-title: "&2&lECHO &7┃ &6Főmenü"
 menu-join-message: "&6Csatlakozási &aüzenet beállítása"
 menu-leave-message: "&6Kilépési &aüzenet beállítása"
 menu-reset-messages: "&6Üzenetek &avisszaállítása"
+preview-menu-title: "&2&lECHO &7┃ &6Előnézet"
 
 # Main Menu items
 menu-item-join-message:

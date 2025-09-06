@@ -45,7 +45,10 @@ public final class Echo extends JavaPlugin {
         connect();
         saveConfig();
         setLanguage();
-        checkForUpdates();
+
+        if (getConfig().getBoolean("check-updates")) {
+            checkForUpdates();
+        }
     }
 
     @Override

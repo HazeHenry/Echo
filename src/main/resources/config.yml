@@ -1,9 +1,15 @@
-# Controls the language of the messages and guis
-# Currently supported languages: en, hu
+# =====================================================
+#  Echo Plugin – Configuration (v0.1 BETA)
+#  Customize all messages and menus here.
+#  Color codes (&a, &6, &7) and HEX (<#RRGGBB>) are supported.
+# =====================================================
+
+# Controls which language is used for messages and GUIs.
+# Supported: en, hu
 lang: en
 
-# Placeholders
-# Currently manages if the %world% placeholder is allowed to be used
+# Enables the %world% placeholder in messages.
+# true = players can use %world%, false = placeholder is disabled
 ph-world-enabled: true
 
 # Permission used for administrative commands like token management, message wiping, etc.
@@ -18,10 +24,12 @@ admin-permission: echo.admin
 # Menu configuration
 glowing-items: true
 
-# Title configuration for selection & setting
+# Title settings when players set a message.
 title-enabled: true
 title-main: "§aMessage Editing"
 title-sub: "§7Type your desired §6join§7/§6leave §7message in the chat."
 
-# Not recommended to remove, checks updates
-version: 0.1
+# Checks for plugin updates on startup.
+# Recommended: true (keeps you up-to-date)
+# Warning: disabling may cause you to miss important fixes.
+check-updates: true

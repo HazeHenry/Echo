@@ -1,6 +1,8 @@
 package eu.northpoint.echo.localization;
 
+import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import eu.northpoint.echo.Echo;
+import eu.northpoint.echo.utils.StringUtils;
 import lombok.Getter;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -25,6 +27,8 @@ public class Messages {
     public static String MENU_JOIN_MESSAGE;
     public static String MENU_LEAVE_MESSAGE;
     public static String MENU_RESET_MESSAGES;
+    public static String PREVIEW_MENU_TITLE;
+
     public static String NO_PERMISSION;
     public static String NO_MESSAGE_FOUND;
 
@@ -57,6 +61,7 @@ public class Messages {
         MENU_JOIN_MESSAGE = config.getString("menu-join-message", "&aSet &6Join &aMessage");
         MENU_LEAVE_MESSAGE = config.getString("menu-leave-message", "&aSet &6Leave &aMessage");
         MENU_RESET_MESSAGES = config.getString("menu-reset-messages", "&aReset &6Messages");
+        PREVIEW_MENU_TITLE = config.getString("preview-menu-title", "&2&lECHO &7┃ &6Preview");
         NO_PERMISSION = config.getString("no-permission", "&cYou don't have permission to set your messages!");
         NO_MESSAGE_FOUND = config.getString("no-message-found", "&cNo message yet!");
         MENU_ITEM_JOIN_MESSAGE_NAME = config.getString("menu-item-join-message.name", "&aSet &6Join &aMessage");
@@ -67,16 +72,5 @@ public class Messages {
         MENU_ITEM_MESSAGE_INFO_LORE = new ArrayList<>(config.getStringList("menu-item-message-info.lore"));
         TITLE_MAIN = config.getString("title-main", "&aJoin Message");
         TITLE_SUB = config.getString("title-sub", "&7Type your desired join message in the chat.");
-    }
-
-    public static String format(String message) {
-        return ChatColor.translateAlternateColorCodes('&', message);
-    }
-
-    public static List<String> format(List<String> messages) {
-        for (String line : messages) {
-            messages.set(messages.indexOf(line), format(line));
-        }
-        return messages;
     }
 }
