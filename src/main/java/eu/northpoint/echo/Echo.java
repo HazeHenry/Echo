@@ -36,11 +36,9 @@ public final class Echo extends JavaPlugin {
         instance = this;
 
         GuiManager.register(this);
-        Bukkit.getPluginManager().registerEvents(new PlayerMessagesListener(), this);
-        Bukkit.getPluginManager().registerEvents(new EchoMessageListener(), this);
 
-        getCommand("echo").setExecutor(new EchoMenuCommand());
-        getCommand("setmessage").setExecutor(new SetMessagesCommand());
+        registerCommands();
+        registerListeners();
 
         connect();
         saveConfig();
@@ -64,6 +62,16 @@ public final class Echo extends JavaPlugin {
             lang = "en";
         }
         Messages.load(lang);
+    }
+
+    private void registerCommands() {
+        getCommand("echo").setExecutor(new EchoMenuCommand());
+        getCommand("setmessage").setExecutor(new SetMessagesCommand());
+    }
+
+    private void registerListeners() {
+        getServer().getPluginManager().registerEvents(new EchoMessageListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerMessagesListener(), this);
     }
 
     private void connect() {

@@ -58,7 +58,7 @@ public class EchoMenuCommand implements CommandExecutor {
         return true;
     }
 
-    private Gui openMainMenu(Player p) {
+    private void openMainMenu(Player p) {
         Gui gui = new Gui(StringUtils.process(Messages.MENU_TITLE), 5);
 
         gui.fillBorder(Material.GRAY_STAINED_GLASS_PANE);
@@ -70,7 +70,7 @@ public class EchoMenuCommand implements CommandExecutor {
         gui.addItem(MenuItemBuilder.messageInfoItem(p), inventoryClickEvent -> p.playSound(p, Sound.ENTITY_PUFFER_FISH_FLOP, 0.5f,1f), 24);
         gui.addItem(MenuItemBuilder.generalInfoItem(), inventoryClickEvent -> p.playSound(p, Sound.BLOCK_NOTE_BLOCK_PLING, 0.5f,1f), 44);
 
-        return gui.show(p);
+        gui.show(p);
     }
 
     private void handleMessage(Player p, String type) {
