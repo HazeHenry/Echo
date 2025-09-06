@@ -5,17 +5,22 @@ import eu.northpoint.echo.localization.Messages;
 import eu.northpoint.echo.utils.DatabaseUtils;
 import eu.northpoint.echo.utils.StringUtils;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerTextures;
 
+import java.lang.reflect.Field;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.UUID;
 
 public class MenuItemBuilder {
 
@@ -52,13 +57,12 @@ public class MenuItemBuilder {
         String leaveMessage = messages.length > 1 && messages[1] != null
                 ? messages[1] : StringUtils.process(Messages.NO_MESSAGE_FOUND);
 
-        joinMessage = ChatColor.translateAlternateColorCodes('&', joinMessage);
-        leaveMessage = ChatColor.translateAlternateColorCodes('&', leaveMessage);
+        joinMessage = StringUtils.process(joinMessage);
+        leaveMessage = StringUtils.process(leaveMessage);
 
         ItemStack item = new ItemStack(Material.PAPER);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',
-                StringUtils.process(Messages.MENU_ITEM_MESSAGE_INFO_NAME)));
+        meta.setDisplayName(StringUtils.process(Messages.MENU_ITEM_MESSAGE_INFO_NAME));
 
         List<String> template = Messages.MENU_ITEM_MESSAGE_INFO_LORE;
 
@@ -66,46 +70,32 @@ public class MenuItemBuilder {
         for (String line : template) {
             String replaced = line.replace("%joinmessage%", joinMessage)
                     .replace("%leavemessage%", leaveMessage);
-            replaced = ChatColor.translateAlternateColorCodes('&', replaced);
+            replaced = StringUtils.process(replaced);
 
             if (ChatColor.stripColor(replaced).length() > 35) {
-                lore.addAll(wrapLore(replaced, 35));
+                lore.addAll(StringUtils.wrapLore(replaced, 35));
             } else {
                 lore.add(replaced);
             }
         }
+
         meta.setLore(lore);
         item.setItemMeta(meta);
         return item;
     }
 
-    public static List<String> wrapLore(String input, int maxLength) {
-        List<String> lines = new ArrayList<>();
-        if (input == null) return lines;
+    public static ItemStack generalInfoItem() {
+        ItemStack item = new ItemStack(Material.NETHER_STAR);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(StringUtils.process(Messages.MENU_ITEM_GENERAL_INFO_NAME));
 
-        StringBuilder current = new StringBuilder();
-        String lastColor = "";
-
-        for (String word : input.split(" ")) {
-            Matcher matcher = Pattern.compile("§[0-9a-f]").matcher(word.toLowerCase());
-            if (matcher.find()) {
-                lastColor = matcher.group();
-            }
-
-            String coloredWord = lastColor + word;
-
-            if (ChatColor.stripColor(current + coloredWord + " ").length() > maxLength) {
-                lines.add(current.toString().trim());
-                current = new StringBuilder();
-            }
-
-            current.append(coloredWord).append(" ");
+        List<String> lore = new ArrayList<>();
+        for (String line : Messages.MENU_ITEM_GENERAL_INFO_LORE) {
+            lore.add(StringUtils.process(line, false));
         }
+        meta.setLore(lore);
+        item.setItemMeta(meta);
 
-        if (!current.isEmpty()) {
-            lines.add(lastColor + current.toString().trim());
-        }
-
-        return lines;
+        return item;
     }
 }

@@ -55,7 +55,8 @@ public class EchoMenuCommand implements CommandExecutor {
 
         gui.addItem(MenuItemBuilder.joinMessageItem(), inventoryClickEvent -> handleMessage(p, "join"), 20);
         gui.addItem(MenuItemBuilder.leaveMessageItem(), inventoryClickEvent -> handleMessage(p, "leave"), 21);
-        gui.addItem(MenuItemBuilder.messageInfoItem(p), inventoryClickEvent -> {}, 24);
+        gui.addItem(MenuItemBuilder.messageInfoItem(p), inventoryClickEvent -> p.playSound(p, Sound.ENTITY_PUFFER_FISH_FLOP, 0.5f,1f), 24);
+        gui.addItem(MenuItemBuilder.generalInfoItem(), inventoryClickEvent -> p.playSound(p, Sound.BLOCK_NOTE_BLOCK_PLING, 0.5f,1f), 44);
 
         return gui.show(p);
     }

@@ -38,6 +38,8 @@ public class Messages {
     public static List<String> MENU_ITEM_LEAVE_MESSAGE_LORE;
     public static String MENU_ITEM_MESSAGE_INFO_NAME;
     public static List<String> MENU_ITEM_MESSAGE_INFO_LORE;
+    public static String MENU_ITEM_GENERAL_INFO_NAME;
+    public static List<String> MENU_ITEM_GENERAL_INFO_LORE;
 
     public static String TITLE_MAIN;
     public static String TITLE_SUB;
@@ -70,6 +72,8 @@ public class Messages {
         MENU_ITEM_LEAVE_MESSAGE_LORE = new ArrayList<>(config.getStringList("menu-item-leave-message.lore"));
         MENU_ITEM_MESSAGE_INFO_NAME = config.getString("menu-item-message-info.name", "&aCurrent Messages");
         MENU_ITEM_MESSAGE_INFO_LORE = new ArrayList<>(config.getStringList("menu-item-message-info.lore"));
+        MENU_ITEM_GENERAL_INFO_NAME = config.getString("menu-item-general-info.name", "&aInformation");
+        MENU_ITEM_GENERAL_INFO_LORE = new ArrayList<>(config.getStringList("menu-item-general-info.lore"));
         TITLE_MAIN = config.getString("title-main", "&aJoin Message");
         TITLE_SUB = config.getString("title-sub", "&7Type your desired join message in the chat.");
     }

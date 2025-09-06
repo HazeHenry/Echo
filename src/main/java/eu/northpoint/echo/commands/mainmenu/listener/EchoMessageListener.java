@@ -1,14 +1,13 @@
 package eu.northpoint.echo.commands.mainmenu.listener;
 
-import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import eu.northpoint.echo.Echo;
 import eu.northpoint.echo.commands.mainmenu.command.EchoMenuCommand;
 import eu.northpoint.echo.gui.Gui;
 import eu.northpoint.echo.localization.Messages;
 import eu.northpoint.echo.utils.DatabaseUtils;
 import eu.northpoint.echo.utils.StringUtils;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -19,9 +18,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public class EchoMessageListener implements Listener {
 
@@ -49,6 +46,8 @@ public class EchoMessageListener implements Listener {
             return;
         }
 
+        message = message.substring(0, Math.min(message.length(), Echo.getInstance().getConfig().getInt("max-message-length")));
+
         message = StringUtils.process(message);
 
         openConfirmationMenu(p, message);
@@ -62,7 +61,7 @@ public class EchoMessageListener implements Listener {
     }
 
     private void openConfirmationMenu(Player p, String message) {
-        Gui gui = new Gui("§2§lECHO §7┃ §6Message Preview", 5);
+        Gui gui = new Gui(StringUtils.process(Messages.PREVIEW_MENU_TITLE), 5);
 
         gui.fillBorder(Material.GRAY_STAINED_GLASS_PANE);
         gui.fillBottom(Material.GRAY_STAINED_GLASS_PANE);
@@ -71,7 +70,7 @@ public class EchoMessageListener implements Listener {
         gui.addItem(getConfirm(), inventoryClickEvent -> handleConfirm(p), 20);
         gui.addItem(getCancel(), inventoryClickEvent -> handleCancel(p), 21);
         gui.addItem(getRefund(), inventoryClickEvent -> handleRefund(p), 22);
-        gui.addItem(getPreview(message), inventoryClickEvent -> {}, 24);
+        gui.addItem(getPreview(message), inventoryClickEvent -> p.playSound(p, Sound.BLOCK_NOTE_BLOCK_PLING, 1f,1f), 24);
 
         gui.show(p);
     }
@@ -80,10 +79,14 @@ public class EchoMessageListener implements Listener {
         ItemStack item = new ItemStack(Material.LIME_WOOL);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(StringUtils.process(Messages.PREVIEW_MENU_TITLE));
-        meta.setLore(Arrays.asList(
-                "",
-                StringUtils.process(message)
-        ));
+        List<String> lore = new ArrayList<>();
+        lore.add("");
+        if (ChatColor.stripColor(message).length() > 35) {
+            lore.addAll(StringUtils.wrapLore(message, 35));
+        } else {
+            lore.add(message);
+        }
+        meta.setLore(lore);
         item.setItemMeta(meta);
         return item;
     }

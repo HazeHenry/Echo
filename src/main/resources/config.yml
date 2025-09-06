@@ -12,6 +12,9 @@ lang: en
 # true = players can use %world%, false = placeholder is disabled
 ph-world-enabled: true
 
+# Control the maximum length of a join/leave message. Default: 300
+max-message-length: 300
+
 # Permission used for administrative commands like token management, message wiping, etc.
 admin-permission: echo.admin
 
