@@ -6,7 +6,7 @@ This is the first public beta release of Echo, a lightweight plugin that lets pl
  - Join/Leave message customization per player.
  - Interactive GUI menu with token-based costs.
  - Token system with LuckPerms support (echo.token.1, echo.token.infinite).
- - Gradient and HEX color parsing (<GRADIENT:FF0000>>message</GRADIENT:00FF00>, <#RRGGBB>).
+ - Gradient and HEX color parsing (<<GRADIENT:FF0000>>message</GRADIENT:00FF00>, <#RRGGBB>).
  - H2 database storage (auto-created, no external setup).
  - Multi-language support (en, hu by default).
  - Configurable messages, menus, and settings.
