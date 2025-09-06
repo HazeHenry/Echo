@@ -19,3 +19,6 @@ This is the first public beta release of Echo, a lightweight plugin that lets pl
 📢 Feedback
 Please open issues on GitHub for bugs, feature requests, or suggestions.
 Echo is designed with server owner experience first – your input will shape its development.
+
+SpigotMC Page
+https://www.spigotmc.org/resources/echo┃hear-the-voice-of-the-players.128666
