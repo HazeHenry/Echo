@@ -5,13 +5,19 @@ set-leave-prompt: "&aType your &6leave &amessage in chat. &7Type 'cancel' to abo
 reset-confirmation: "&eYour join and leave messages have been reset."
 no-permission: "&cYou don't have permission to set your messages!"
 no-message-found: "&cNo message yet!"
+message-set-success: "§aSuccessfully set message!"
 
 # Main Menu customization
 menu-title: "&2&lECHO &7┃ &6Main Menu"
 menu-join-message: "&aSet &6Join &aMessage"
 menu-leave-message: "&aSet &6Leave &aMessage"
 menu-reset-messages: "&aReset &6Messages"
+
+# Preview Menu customization
 preview-menu-title: "&2&lECHO &7┃ &6Preview"
+preview-confirm-item: "&a&l✔"
+preview-cancel-item: "&c&l✘"
+preview-refund-item: "&6&l⇄"
 
 # Main Menu items
 menu-item-join-message:

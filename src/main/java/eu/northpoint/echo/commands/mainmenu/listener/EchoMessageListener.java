@@ -94,7 +94,7 @@ public class EchoMessageListener implements Listener {
     private ItemStack getConfirm() {
         ItemStack item = new ItemStack(Material.LIME_WOOL);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName("§a§l✔");
+        meta.setDisplayName(StringUtils.process(Messages.PREVIEW_CONFIRM_ITEM));
         item.setItemMeta(meta);
         return item;
     }
@@ -102,7 +102,7 @@ public class EchoMessageListener implements Listener {
     private ItemStack getCancel() {
         ItemStack item = new ItemStack(Material.RED_WOOL);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName("§c§l✘");
+        meta.setDisplayName(StringUtils.process(Messages.PREVIEW_CANCEL_ITEM));
         item.setItemMeta(meta);
         return item;
     }
@@ -110,7 +110,7 @@ public class EchoMessageListener implements Listener {
     private ItemStack getRefund() {
         ItemStack item = new ItemStack(Material.ORANGE_WOOL);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName("§6§l⇄");
+        meta.setDisplayName(StringUtils.process(Messages.PREVIEW_REFUND_ITEM));
         item.setItemMeta(meta);
         return item;
     }
@@ -129,7 +129,7 @@ public class EchoMessageListener implements Listener {
     }
 
     private void handleConfirm(Player p) {
-        if (!p.hasPermission("echo.token.1") && !p.hasPermission("echo.custommessage.unlimited")) {
+        if (!p.hasPermission("echo.token.1") && !p.hasPermission("echo.token.infinite")) {
             p.sendMessage(StringUtils.process(Messages.NO_PERMISSION));
             return;
         }
@@ -137,7 +137,8 @@ public class EchoMessageListener implements Listener {
         p.sendTitle("", "");
         p.closeInventory();
         p.playSound(p, Sound.ENTITY_PLAYER_LEVELUP, 1f, 0.8f);
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"lp user " + p.getName() + " permission unset echo.token.1");
+        if (p.hasPermission("echo.token.1"))
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"lp user " + p.getName() + " permission unset echo.token.1");
 
         String[] messages = DatabaseUtils.getMessages(p.getUniqueId());
         switch (EchoMenuCommand.getActiveMessageType().get(p.getUniqueId())) {
@@ -156,6 +157,7 @@ public class EchoMessageListener implements Listener {
                 );
                 break;
         }
+        p.sendMessage(StringUtils.process(Messages.MESSAGE_SET_SUCCESS));
 
         EchoMenuCommand.getActiveMessageType().remove(p.getUniqueId());
         activeMessage.remove(p.getUniqueId());

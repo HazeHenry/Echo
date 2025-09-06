@@ -23,6 +23,12 @@ public class EchoMenuCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player p)) {
+            if (args.length >= 1 && args[0].equalsIgnoreCase("reload")) {
+                Echo.getInstance().reload();
+                sender.sendMessage("§aPlugin reloaded successfully.");
+                return true;
+            }
+
             sender.sendMessage("§cYou must be a player to use this command.");
             return false;
         }
@@ -39,7 +45,13 @@ public class EchoMenuCommand implements CommandExecutor {
             }
 
             Echo.getInstance().reload();
-            sender.sendMessage("§aPlugin reloaded!");
+            sender.sendMessage("§aPlugin reloaded successfully!");
+            return true;
+        }
+
+        if (!args[0].equalsIgnoreCase("reload") && p.hasPermission("echo.admin")) {
+            sender.sendMessage("§2§lECHO §7┃ §7Hear the voice of the players.");
+            sender.sendMessage("§a/echo reload §7- Reloads the plugin.");
             return true;
         }
 

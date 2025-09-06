@@ -5,22 +5,15 @@ import eu.northpoint.echo.localization.Messages;
 import eu.northpoint.echo.utils.DatabaseUtils;
 import eu.northpoint.echo.utils.StringUtils;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.profile.PlayerProfile;
-import org.bukkit.profile.PlayerTextures;
 
-import java.lang.reflect.Field;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class MenuItemBuilder {
 
@@ -31,6 +24,7 @@ public class MenuItemBuilder {
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
+
         meta.setDisplayName(StringUtils.process(Messages.MENU_ITEM_JOIN_MESSAGE_NAME));
         meta.setLore(StringUtils.process(Messages.MENU_ITEM_JOIN_MESSAGE_LORE));
         item.setItemMeta(meta);
@@ -44,6 +38,7 @@ public class MenuItemBuilder {
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
+
         meta.setDisplayName(StringUtils.process(Messages.MENU_ITEM_LEAVE_MESSAGE_NAME));
         meta.setLore(StringUtils.process(Messages.MENU_ITEM_LEAVE_MESSAGE_LORE));
         item.setItemMeta(meta);
@@ -93,9 +88,9 @@ public class MenuItemBuilder {
         for (String line : Messages.MENU_ITEM_GENERAL_INFO_LORE) {
             lore.add(StringUtils.process(line, false));
         }
+
         meta.setLore(lore);
         item.setItemMeta(meta);
-
         return item;
     }
 }

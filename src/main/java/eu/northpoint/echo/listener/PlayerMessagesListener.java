@@ -1,6 +1,5 @@
 package eu.northpoint.echo.listener;
 
-import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import eu.northpoint.echo.Echo;
 import eu.northpoint.echo.utils.DatabaseUtils;
 import eu.northpoint.echo.utils.StringUtils;

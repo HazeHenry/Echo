@@ -1,9 +1,9 @@
 name: Echo
-version: '0.1'
+version: '0.1-BETA'
 main: eu.northpoint.echo.Echo
 api-version: '1.18'
 author: HazeHenry
-description: Allows players to easily customize their join and leave messages, by admin given permission.
+description: Allows players to easily customize their join and leave messages, by admin given permissions.
 website: https://github.com/HazeHenry/Echo
 depend: [LuckPerms]
 commands:
@@ -13,3 +13,14 @@ commands:
   setmessage:
     description: Set join or leave message
     usage: /setmessage <player> <join/leave> <message>
+
+permissions:
+  echo.admin:
+    description: Gives access to all Echo commands
+    default: op
+  echo.token.1:
+    description: Allows you to set a message once
+    default: op
+  echo.token.infinite:
+    description: Allows you to set an infinite amount of messages
+    default: op
