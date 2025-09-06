@@ -1,4 +1,4 @@
-# Message settings
+# Main Messages
 cancel-message: "&cAz üzenet szerkesztése megszakítva."
 set-join-prompt: "&aÍrd be a &6csatlakozási &aüzeneted a chatbe. &7'&ccancel&7'&a-lel megszakíthatod."
 set-leave-prompt: "&aÍrd be a &6kilépési &aüzeneted a chatbe. &7'&ccancel&7'&a-lel megszakíthatod."
@@ -20,7 +20,7 @@ menu-item-join-message:
     - ""
     - "&7Írd be a csatlakozási üzeneted a chatbe,"
     - "&7amit minden játékos látja, amikor csatlakozik."
-    - "&8RGB és HEX színek támogatása!"
+    - "&8RGB és HEX színek támogatva vannak!"
     - ""
     - "&7Lehetséges helyű helyű támogatás: &e%name%&7, &e%prefix%&7, &e%world%"
     - ""
@@ -35,7 +35,7 @@ menu-item-leave-message:
     - ""
     - "&7Írd be a kilépési üzeneted a chatbe,"
     - "&7amit minden játékos látja, amikor kilép."
-    - "&8RGB és HEX színek támogatása!"
+    - "&8RGB és HEX színek támogatva vannak!"
     - ""
     - "&7Lehetséges helyű helyű támogatás: &e%name%&7, &e%prefix%&7, &e%world%"
     - ""

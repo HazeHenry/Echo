@@ -1,7 +1,4 @@
-# ==========================
-# 🔧 GENERAL SETTINGS
-# ==========================
-
+# Main Messages
 cancel-message: "&cMessage editing cancelled."
 set-join-prompt: "&aType your &6join &amessage in chat. &7Type '&ccancel&7' to abort."
 set-leave-prompt: "&aType your &6leave &amessage in chat. &7Type 'cancel' to abort."
